@@ -9,7 +9,7 @@ Getting started
 Fork the [directory-symfony] repository on GitHub.
 If you are unfamiliar with forking, [follow these instructions](http://lmgtfy.com/?q=how+to+fork+a+repo+in+github).
 
-Then clone your repository locally using [Git][git]:
+Then clone your repository locally using [Git](https://git-scm.com/):
 
 ```
 git clone https://github.com/HamZaKHa/directory-symfony.git
