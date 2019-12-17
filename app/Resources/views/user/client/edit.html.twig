@@ -1,0 +1,24 @@
+{% extends ':layout:base-layout.html.twig' %}
+
+{% block title %}AnnuaireProjets - Clients{% endblock %}
+
+{% block page_title %}Client {% endblock %}
+{% block page_subtitle %}{{ 'customer.index.edit_customer'|trans({}, 'messages') }}{% endblock %}
+
+{% block page_content %}
+    <h1>{{ 'customer.index.edit_customer'|trans({}, 'messages') }}</h1>
+
+    <div class="box-footer">
+        <div class="btn-group">
+            {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <input type="submit" value="Save" class="btn btn-success"/>
+            {{ form_end(edit_form) }}
+
+            <a href="{{ path('client_index') }}" class="btn btn-info">Back to the list</a>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete" class="btn btn-danger"/>
+            {{ form_end(delete_form) }}
+        </div>
+    </div>
+{% endblock %}

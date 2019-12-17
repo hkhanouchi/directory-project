@@ -1,0 +1,50 @@
+parameters:
+    app.show_user_listener.class: AppBundle\EventListener\ShowUserListener
+    app.setup_menu_listener.class: AppBundle\EventListener\SidebarSetupMenuListener
+    app.exception_controller.class: AppBundle\Controller\ExceptionController
+    app.profile_form_type.class: AppBundle\Form\User\Type\ProfileType
+    app.change_password_form_type.class: AppBundle\Form\User\Type\ChangePasswordType
+    app.elastic_search.class: AppBundle\Service\Elasticsearch
+
+services:
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
+    app.show_user_listener:
+        class: '%app.show_user_listener.class%'
+        arguments: [ "@service_container" ]
+        tags:
+            - { name: kernel.event_listener, event: theme.navbar_user, method: onShowUser }
+            - { name: kernel.event_listener, event: theme.sidebar_user, method: onShowUser }
+    app.setup_menu_listener:
+        class: '%app.setup_menu_listener.class%'
+        tags:
+            - { name: kernel.event_listener, event: theme.sidebar_setup_menu, method: onSetupMenu }
+            - { name: kernel.event_listener, event: theme.breadcrumb, method: onSetupMenu }
+    app.profile.form.type:
+        class: '%app.profile_form_type.class%'
+        tags:
+            - { name: form.type, alias: app_user_profile }
+    app.change_password.form.type:
+        class: '%app.change_password_form_type.class%'
+        tags:
+            - { name: form.type, alias: app_user_change_password }
+    app.exception_controller:
+        class: '%app.exception_controller.class%'
+        arguments: [ "@twig", "%kernel.debug%" ]
+    app.elastic_search:
+        class: '%app.elastic_search.class%'
+        arguments: [ "@fos_elastica.finder.app.project" ]
+    app.technotag_form_type.tags:
+        class: AppBundle\Form\TechnologieTagsType
+        arguments: [ "@doctrine.orm.entity_manager" ]
+        tags:
+            - { name: form.type }
+    app.typotag_form_type.tags:
+            class: AppBundle\Form\TypologieTagsType
+            arguments: [ "@doctrine.orm.entity_manager" ]
+            tags:
+                - { name: form.type }
+
+

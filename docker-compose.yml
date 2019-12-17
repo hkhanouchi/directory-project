@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+    db:
+        image: mysql
+        volumes:
+            - "./.data/db:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+    php:
+        build: docker/php7-fpm
+        volumes:
+            - ${SYMFONY_APP_PATH}:/var/www/symfony
+            - ./app/logs:/var/www/symfony/app/logs
+        depends_on:
+            - elasticsearch
+
+    nginx:
+        build: docker/nginx
+        ports:
+            - 80:80
+        volumes_from:
+            - php
+
+    elasticsearch:
+        image: elasticsearch:2.2
+        dns_search:
+            - elasticsearch
+        ports:
+            - 9200:9200
+
+    kibana:
+        build: docker/kibana
+        environment:
+            - "ELASTICSEARCH_URL=http://elasticsearch:9200"
+        ports:
+            - 5601:5601
+        depends_on:
+            - elasticsearch
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - "8080:80"

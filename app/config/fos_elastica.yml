@@ -1,0 +1,40 @@
+fos_elastica:
+    clients:
+        default: { host: %elastic_host%, port: %elastic_port% }
+    indexes:
+        app:
+            client: default
+            index_name: app_prod
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            custom_french_analyzer:
+                                type: custom
+                                tokenizer: standard
+                                filter: ["asciifolding", "lowercase", "french_stem", "stop_fr", "stemmer_fr"]
+                        filter:
+                            stop_fr:
+                                type: "stop"
+                                stopwords: ["l", "m", "t", "qu", "n", "s", "j", "d"]
+                            stemmer_fr:
+                                type: "stemmer"
+                                name: "light_french"
+            types:
+                project:
+                    mappings:
+                        name: { analyzer: custom_french_analyzer, type: string }
+                        longname: ~
+                        createdAt: { type: date }
+                        technologie: ~
+                        typologie: ~
+                        manager:
+                            type: nested
+                            properties:
+                                id: ~
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Project
+                        finder: ~
+                        provider: ~
+                        listener: ~

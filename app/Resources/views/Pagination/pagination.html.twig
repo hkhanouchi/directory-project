@@ -1,0 +1,20 @@
+{% if pageCount > 1 %}
+
+    <li class="paginate_button previous{% if previous is not defined %} disabled{% endif %}" id="example2_previous"><a
+                href="{% if previous is not defined %}#{% else %}{{ path(route, query|merge({(pageParameterName): previous})) }}{% endif %}" aria-controls="example2"
+                data-dt-idx="0" tabindex="0">Previous</a></li>
+
+    {% for page in pagesInRange %}
+        <li class="paginate_button{% if page == current %} active{% endif %}"><a
+                    href="{% if page == current %}#{% else %}{{ path(route, query|merge({(pageParameterName): page})) }}{% endif %}" aria-controls="example2"
+                    data-dt-idx="6" tabindex="0">{{ page }}</a></li>
+    {% endfor %}
+
+    <li class="paginate_button next{% if next is not defined %} disabled{% endif %}" id="example2_next"><a
+                href="{% if next is not defined %}#{% else %}{{ path(route, query|merge({(pageParameterName): next})) }}{% endif %}" aria-controls="example2"
+                data-dt-idx="7" tabindex="0">Next</a></li>
+
+{% endif %}
+
+
+

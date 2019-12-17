@@ -1,0 +1,68 @@
+<!-- search form -->
+<form action="{{ path('search_project') }}" method="get" class="sidebar-form search-project">
+    <input type="hidden" name="user_id" value="{{ app.user.id }}">
+    <div class="col-md-12">
+        <h3>Recherche projets</h3>
+        <div class="row">
+            <div class="form-group col-md-6">
+
+                <label>Par date : </label>
+
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" name="date_filter" class="form-control pull-right"
+                           id="daterange-btn" value="{% if date_filter is defined %}{{ date_filter }}{% endif %}">
+                </div>
+            </div>
+            <div class="col-md-6 clear-bloc">
+                <label>
+                    <input type="checkbox" class="minimal" name="icheck_user"{% if icheck_filter is not empty %} checked{% endif %}>
+                    Mes porjets
+                </label>
+
+                <button type="button" class="filter-clear btn btn-primary col-md-4 pull-right">Clear</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Par technologie : </label>
+                <select class="form-control select2 filter-tags-techno" multiple="multiple"
+                        data-placeholder="Sélectionner une technologie"
+                        style="width: 100%;">
+                    {% if technologie is not empty %}
+                        {% for techno in technologie %}
+                            <option value="{{ techno.id }}">{{ techno.name }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Par typologie : </label>
+                <select class="form-control select2 filter-tags-techno" multiple="multiple"
+                        data-placeholder="Sélectionner une typologie"
+                        style="width: 100%;">
+                    {% if typologie is not empty %}
+                        {% for typo in typologie %}
+                            <option value="{{ typo.id }}">{{ typo.name }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control"
+                       placeholder="Rechercher votre projet..."{% if search is defined %} value='{{ search }}'{% endif %}/>
+                <span class="input-group-btn">
+            <button type='submit' name='search_btn' id='search-btn' class="btn btn-flat"><i
+                        class="fa fa-search"></i></button>
+        </span>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- /.search form -->

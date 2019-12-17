@@ -1,0 +1,63 @@
+{% extends ':layout:base-layout.html.twig' %}
+
+{% block title %}AnnuaireProjets - Projets{% endblock %}
+
+{% block page_title %}Résultat{% endblock %}
+{% block page_subtitle %}Projet{% endblock %}
+
+{% block page_content %}
+
+    <section class="content">
+        <div class="row">
+            {{ render(controller('AppBundle:Search:searchProjectForm', { 'search': search, 'date_filter': date_filter, 'icheck_filter': icheck_filter })) }}
+        </div>
+        <div class="box-body table-responsive no-padding">
+            <div class="col-sm-12">
+                <ul class="timeline">
+                    {% if projects.getTotalItemCount == 0 %}
+                        <li class="time-label">
+                            <span class="bg-red">
+                               Aucun Projet n'a été trouvé  : {{ search }}
+                            </span>
+                        </li>
+                        <li>Désolé, aucun résultat n'a été trouvé</li>
+                    {% else %}
+                        <li class="time-label">
+                        <span class="bg-green">
+                           Projet rechercher  ({{ projects.getTotalItemCount }}) : {{ search }}
+                        </span>
+                        </li>
+                        {% for project in projects %}
+                            <li>
+                                <i class="fa fa-cubes bg-aqua"></i>
+                                <div class="timeline-item">
+                                    <span class="time"><i class="fa fa-clock-o"></i> {{ project.createdat|date('Y-m-d') }}</span>
+                                    <h3 class="timeline-header"><a
+                                                href="{{ path('project_show', { 'id': project.id }) }}">{{ project.name }}</a> - {{ project.commercialfullname }}</h3>
+                                    <div class="timeline-body">
+                                        {{ project.longname }}
+                                    </div>
+                                    <div class="timeline-footer">
+                                        <a href="{{ project.urljira }}" class="btn btn-primary btn-xs"
+                                           target="_blank">Jira</a>
+                                        <a href="{{ project.urlgit }}" class="btn btn-success btn-xs" target="_blank">Git</a>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="bloc">
+                <div class="col-sm-12">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                        <ul class="pagination">
+                        {{ knp_pagination_render(projects) }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

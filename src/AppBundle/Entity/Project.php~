@@ -1,0 +1,464 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use AppBundle\Tags\Taggable;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Entity\User\Client;
+use AppBundle\Entity\User\User;
+
+
+/**
+ * roject
+ *
+ * @ORM\Table(name="project")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProjectRepository")
+ */
+class Project
+{
+
+    use Taggable;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     */
+    private $name;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="longname", type="string", length=255)
+     */
+    private $longname;
+
+
+    /**
+     * @var Client
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\Client", cascade={"persist"})
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $client;
+
+    /**
+     * @var Manager
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\User", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $manager;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url_jira", type="text")
+     * @Assert\Url()
+     */
+    private $url_jira;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url_git", type="text")
+     * @Assert\Url()
+     */
+    private $url_git;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commercial_fullname", type="text")
+     */
+    private $commercial_fullname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commercial_email", type="text")
+     * @Assert\Email()
+     */
+    private $commercial_email;
+
+    /**
+     * @var Created At
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @var Updated At
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TypologieTag", cascade={"persist"})
+     */
+    private $typologie;
+
+    /**
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TechnologieTag", cascade={"persist"})
+     */
+    private $technologie;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->typologie = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->technologie = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Project
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+
+    /**
+     * Set longname
+     *
+     * @param string $longname
+     *
+     * @return Project
+     */
+    public function setLongname($longname)
+    {
+        $this->longname = $longname;
+
+        return $this;
+    }
+
+
+    /**
+     * Get longname
+     *
+     * @return string
+     */
+    public function getLongname()
+    {
+        return $this->longname;
+    }
+
+    /**
+     * Set urlJira
+     *
+     * @param string $urlJira
+     *
+     * @return Project
+     */
+    public function setUrlJira($urlJira)
+    {
+        $this->url_jira = $urlJira;
+
+        return $this;
+    }
+
+    /**
+     * Get urlJira
+     *
+     * @return string
+     */
+    public function getUrlJira()
+    {
+        return $this->url_jira;
+    }
+
+    /**
+     * Set urlGit
+     *
+     * @param string $urlGit
+     *
+     * @return Project
+     */
+    public function setUrlGit($urlGit)
+    {
+        $this->url_git = $urlGit;
+
+        return $this;
+    }
+
+    /**
+     * Get urlGit
+     *
+     * @return string
+     */
+    public function getUrlGit()
+    {
+        return $this->url_git;
+    }
+
+    /**
+     * Set commercialFullname
+     *
+     * @param string $commercialFullname
+     *
+     * @return Project
+     */
+    public function setCommercialFullname($commercialFullname)
+    {
+        $this->commercial_fullname = $commercialFullname;
+
+        return $this;
+    }
+
+    /**
+     * Get commercialFullname
+     *
+     * @return string
+     */
+    public function getCommercialFullname()
+    {
+        return $this->commercial_fullname;
+    }
+
+    /**
+     * Set commercialEmail
+     *
+     * @param string $commercialEmail
+     *
+     * @return Project
+     */
+    public function setCommercialEmail($commercialEmail)
+    {
+        $this->commercial_email = $commercialEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get commercialEmail
+     *
+     * @return string
+     */
+    public function getCommercialEmail()
+    {
+        return $this->commercial_email;
+    }
+
+
+    /**
+     * Set Client
+     *
+     * @param string $client
+     *
+     * @return Project
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+
+    /**
+     * Get Client
+     *
+     * @return Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Set manager
+     *
+     * @param \AppBundle\Entity\User\User $manager
+     *
+     * @return Project
+     */
+    public function setManager(\AppBundle\Entity\User\User $manager)
+    {
+        $this->manager = $manager;
+
+        return $this;
+    }
+
+    /**
+     * Get manager
+     *
+     * @return \AppBundle\Entity\User\User
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
+     *
+     * @return string String representation of this class
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Project
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Project
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Add typologie
+     *
+     * @param \AppBundle\Entity\TypologieTag $typologie
+     *
+     * @return Project
+     */
+    public function addTypologie(\AppBundle\Entity\TypologieTag $typologie)
+    {
+        $this->typologie[] = $typologie;
+
+        return $this;
+    }
+
+    /**
+     * Remove typologie
+     *
+     * @param \AppBundle\Entity\TypologieTag $typologie
+     */
+    public function removeTypologie(\AppBundle\Entity\TypologieTag $typologie)
+    {
+        $this->typologie->removeElement($typologie);
+    }
+
+    /**
+     * Get typologie
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTypologie()
+    {
+        return $this->typologie;
+    }
+
+    /**
+     * Add technologie
+     *
+     * @param \AppBundle\Entity\TechnologieTag $technologie
+     *
+     * @return Project
+     */
+    public function addTechnologie(\AppBundle\Entity\TechnologieTag $technologie)
+    {
+        $this->technologie[] = $technologie;
+
+        return $this;
+    }
+
+    /**
+     * Remove technologie
+     *
+     * @param \AppBundle\Entity\TechnologieTag $technologie
+     */
+    public function removeTechnologie(\AppBundle\Entity\TechnologieTag $technologie)
+    {
+        $this->technologie->removeElement($technologie);
+    }
+
+    /**
+     * Get technologie
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTechnologie()
+    {
+        return $this->technologie;
+    }
+}

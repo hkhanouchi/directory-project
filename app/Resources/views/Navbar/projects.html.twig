@@ -1,0 +1,33 @@
+<!-- Tasks: style can be found in dropdown.less -->
+<li class="dropdown tasks-menu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        Mon projet selectionné <i class="fa fa-briefcase"></i>
+        <span class="label label-success">{{ total }}</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="header">{{ 'Vous avez %total% projets' |trans({'%total%':total}, 'AppBundle') }}<br/>
+        <div class="form-group">
+                  <label>Select</label>
+                  <select class="form-control">
+                    <option>option 1</option>
+                    <option>option 2</option>
+                    <option>option 3</option>
+                    <option>option 4</option>
+                    <option>option 5</option>
+                  </select>
+                </div>
+        </li>
+        <li>
+            <!-- inner menu: contains the actual data -->
+            <ul class="menu">
+                <li><!-- start message -->
+                        
+                            mon projet
+                        
+                    </li><!-- end message -->
+            </ul>
+        <li class="footer">
+            <a href="{{ path('avanzu_admin_all_tasks') }}">{{'View all tasks'|trans({}, 'AvanzuAdminTheme')}}</a>
+        </li>
+    </ul>
+</li>

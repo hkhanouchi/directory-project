@@ -1,0 +1,29 @@
+{% extends ':layout:base-layout.html.twig' %}
+
+{% block title %}AnnuaireProjets - Projets{% endblock %}
+
+{% block page_title %}Projets - {% endblock %}
+{% block page_subtitle %}{{ 'project.index.new_project'|trans({}, 'messages') }}{% endblock %}
+
+{% block page_content %}
+
+    <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">{{ 'project.index.new_project'|trans({}, 'messages') }}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {% set attr = form.all['attr'] %}
+                {% if attr['data-help'] is defined %}
+                    <span class="help-block">{{ attr['data-help'] }}</span>
+                {% endif %}
+                <input type="submit" value="Créer" class="btn btn-primary btn-sm" />
+              {{ form_end(form) }}
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+{% endblock %}

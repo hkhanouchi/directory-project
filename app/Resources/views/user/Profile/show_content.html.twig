@@ -1,0 +1,65 @@
+{% import "AvanzuAdminThemeBundle:layout:macros.html.twig" as macro %}
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-4">
+
+            <!-- Profile Image -->
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    {{ macro.avatar(user.avatar, user.username, 'profile-user-img img-responsive img-circle') }}
+
+                    <h3 class="profile-username text-center">{{ user.firstname }} {{ user.lastname }}</h3>
+
+                    <p class="text-muted text-center">{{ user.email }}</p>
+
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>{{ 'profile.edit.lastname'|trans({}, 'messages') }}</b> <span class="pull-right">{{ user.lastname }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <b>{{ 'profile.edit.firstname'|trans({}, 'messages') }}</b> <span class="pull-right">{{ user.firstname }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <b>{{ 'form.email'|trans({}, 'FOSUserBundle') }}</b> <span class="pull-right">{{ user.email }}</span>
+                        </li>
+                    </ul>
+                    <div class="pull-left">
+                        <a class="btn btn-primary btn-block"href="{{ path("avanzu_admin_profile") }}"><b>{{ 'profile.show.edit'|trans({}, 'messages') }}</b></a>
+                    </div>
+                    <div class="pull-right">
+                        <a class="btn btn-primary btn-block"href="{{ path("app_user_change_password") }}"><b>{{ 'profile.change_password.submit'|trans({}, 'messages') }}</b></a>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+            <!-- About Me Box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">About Me</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-8">
+            <div class="nav-tabs-custom">
+
+            </div>
+            <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+</section>
+<!-- /.content -->

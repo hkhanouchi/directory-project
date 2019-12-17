@@ -1,0 +1,55 @@
+{% extends ':layout:base-layout.html.twig' %}
+
+{% block title %}AnnuaireProjets - Projets{% endblock %}
+
+{% block page_title %}Projet {% endblock %}
+{% block page_subtitle %}{{ 'project.index.project'|trans({}, 'messages') }}{% endblock %}
+
+{% block page_content %}
+
+    <a href="{{ path('project_index') }}" class="btn btn-primary btn-sm mB-2">Retour</a>
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{ 'project.index.project'|trans({}, 'messages') }}</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Longname</th>
+                    <th>Client</th>
+                    <th>Manager</th>
+                    <th>Commercial</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ project.id }}</td>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.longname|truncate(35) }}</td>
+                    <td>{{ project.client }}</td>
+                    <td>{{ project.manager.firstName }} {{ project.manager.lastName }}</td>
+                    <td>{{ project.commercialfullname }}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <div class="btn-group">
+                            <a href="{{ path('project_edit', { 'id': project.id }) }}" class="btn btn-primary btn-sm pull-left mR-1">Edit</a>
+
+                            {{ form_start(delete_form, {'attr': {'class': 'pull-right'}})}}
+                            <input type="submit" value="Delete" class="btn btn-danger btn-sm"/>
+                            {{ form_end(delete_form) }}
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

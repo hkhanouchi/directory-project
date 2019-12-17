@@ -1,0 +1,106 @@
+{% extends ':layout:base-layout.html.twig' %}
+
+{% block title %}AnnuaireProjets - Clients{% endblock %}
+
+{% block page_title %}Clients{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">{{ 'customer.index.list_customer'|trans({}, 'messages') }}</h3>
+
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered table-striped dataTable">
+                            <thead>
+                            <tr>
+                                <th>{{ knp_pagination_sortable(clients, 'Id', 'c.id') }}</th>
+                                <th class="{% if clients.isSorted('c.name') %}sorting_asc{% else %} sorting{% endif %}">{{ knp_pagination_sortable(clients, 'Name' , 'c.name') }}</th>
+                                <th class="{% if clients.isSorted('c.email') %}sorting_asc{% else %} sorting{% endif %}">{{ knp_pagination_sortable(clients, 'Email' , 'c.email') }}</th>
+                                <th class="{% if clients.isSorted('c.contact') %}sorting_asc{% else %} sorting{% endif %}">{{ knp_pagination_sortable(clients, 'Contact' , 'c.contact') }}</th>
+                                <th>User(s)</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for client in clients %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('client_show', { 'id': client.id }) }}">{{ client.id }}</a>
+                                    </td>
+                                    <td>{{ client.name }}</td>
+                                    <td>{{ client.email }}</td>
+                                    <td>{{ client.contact }}</td>
+                                    <td>
+                                        {% for user in client.users %}
+                                            - {{ user.firstname }} {{ user.lastname }} {% if not loop.last %}
+                                            <br/> {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="{{ path('client_show', { 'id': client.id }) }}" role="button"
+                                               class="btn btn-default">show</a>
+                                            <a href="{{ path('client_edit', { 'id': client.id }) }}" role="button"
+                                               class="btn btn-default">edit</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="btn-group">
+
+                                        <a href="{{ path('client_new') }}"
+                                           class="btn btn-primary">{{ 'customer.index.create_customer'|trans({}, 'messages') }}</a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            </tfoot>
+
+                        </table>
+                    </div>
+                    <div class="bloc">
+                        <div class="col-sm-5">
+                            <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+                                Showing {{ clients.getCurrentPageNumber }}
+                                to {{ (clients.getTotalItemCount/5)|round(0,'ceil') }}
+                                of {{ clients.getTotalItemCount }}
+                                entries
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                <ul class="pagination">
+                                    {{ knp_pagination_render(clients) }}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+
+
+{% endblock %}

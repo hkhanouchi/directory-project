@@ -1,0 +1,12 @@
+{% extends 'AvanzuAdminThemeBundle:layout:login-layout.html.twig' %}
+
+{% block title %}AnnuaireProjets - Réinitialiser le mot de passe{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('css/override.css') }}" />
+{% endblock %}
+
+{% block page_content %}
+    {{ include('user/Resetting/request_content.html.twig') }}
+{% endblock page_content %}

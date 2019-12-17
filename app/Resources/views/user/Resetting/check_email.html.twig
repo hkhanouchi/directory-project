@@ -1,0 +1,27 @@
+{% extends 'AvanzuAdminThemeBundle:layout:login-layout.html.twig' %}
+
+{% block title %}AnnuaireProjets - Réinitialiser le mot de passe{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/override.css') }}"/>
+{% endblock %}
+
+{% block page_content %}
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="../../index2.html"><b>Annuaire</b>Projets</a>
+        </div><!-- /.login-logo -->
+        <div class="login-box-body">
+            <h4>{{ 'resetting.check.message'|trans({}, 'messages') }}</h4>
+            <div class="row"></div>
+            <p>
+                {{ 'resetting.check.check_email'|trans({'%tokenLifetime%': tokenLifetime}, 'messages') }}
+            </p>
+            <span class="small">{{ 'resetting.check.not_recevied'|trans({}, 'messages') }}</span>
+        </div>
+    </div>
+    </div>
+{% endblock %}

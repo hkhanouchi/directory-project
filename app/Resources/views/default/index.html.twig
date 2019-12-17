@@ -1,0 +1,60 @@
+{% extends ':layout:base-layout.html.twig' %}
+
+{% block title %}AnnuaireProjets - Dashboard{% endblock %}
+{% block avanzu_logo %}
+                <a href="/" class="logo">
+                    <!-- Add the class icon to your logo image or logo icon to add the margining -->
+                    <b>Annuaire</b>Projets
+                </a>
+            {% endblock %}
+
+{% block page_title %}Dashboard{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block page_content %}
+<section class="content">
+    <div class="row">
+        {{ render(controller('AppBundle:Search:searchProjectForm')) }}
+    </div>
+
+      <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Dernière projets recherchés</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-striped">
+                <tbody>
+                <tr>
+                  <td>1.</td>
+                    <td><a href="#">Webop</a></td>
+                  <td></td>
+                  <td><span class="badge bg-red">2h</span></td>
+                </tr>
+                <tr>
+                  <td>2.</td>
+                    <td><a href="#">ORA</a></td>
+                  <td>
+
+                  </td>
+                  <td><span class="badge bg-yellow">5h</span></td>
+                </tr>
+                <tr>
+                  <td>3.</td>
+                    <td><a href="#">Orange</a></td>
+                  <td>
+
+                  </td>
+                  <td><span class="badge bg-light-blue">16h</span></td>
+                </tr>
+
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+      </div>
+</section>
+{% endblock %}

@@ -1,0 +1,68 @@
+profile:
+    edit:
+        lastname: 'Nom'
+        firstname: 'Prénom'
+    show:
+        submit: 'Mettre à jour'
+        edit: 'Editer'
+    change_password:
+        submit: 'Modifier le mot de passe'
+resetting:
+    reset:
+        forget_password: 'J''ai oublié mon mot de passe'
+    request:
+        message: 'Réinitialiser le mot de passe'
+    check:
+        message: 'Consultez votre boîte de réception'
+        check_email: |
+                Un e-mail a été envoyé. Il contient un lien sur lequel il vous faudra cliquer pour réinitialiser votre mot de passe.
+                Remarque : Vous ne pouvez demander un nouveau mot de passe que toutes les %tokenLifetime% heures.
+
+        not_recevied: |
+                Si vous ne recevez pas un email, vérifiez votre dossier spam ou essayez à nouveau.
+project:
+    index:
+        create_project: 'Créer un nouveau projet'
+        list_project: 'Liste projets'
+        new_project: 'Nouveau projet'
+        project: 'Projet'
+        edit_project : 'Project edit'
+
+customer:
+    index:
+        create_customer: 'Créer un nouveau Client'
+        list_customer: 'Liste Clients'
+        new_customer: 'Nouveau Client'
+        customer: 'Client'
+        edit_customer : 'Client edit'
+
+form:
+    label:
+        name: Nom
+        description: Description
+        first_name: Prénom
+        last_name: Nom
+        label: Libellé
+        start_date: Date début
+        end_date: Date fin
+        code_agresso: Code agresso
+        nbr_book:  Nombre de carnets de tickets
+        url_cougar: Adresse cougar
+        url_jira: Url jira
+        url_git: Url git
+        url_agresso: Adresse agresso
+        commercial_fullname: Commercial ( Nom complet )
+        commercial_email: Commercial ( Email )
+        customer: Client
+        manager: Chef de projet
+        type: Type de TMA
+        technologie: Technologie
+        typologie: Typologie
+    select:
+      placeholder: Sélectionner
+
+user:
+    password:
+        secure: le mot de passe doit respecter des exigences de complexité.
+    alpha: Ce champ ne doit comporter que des alphabets.
+    max: Ce champ ne doit pas dépasser {{ max }} caractères.
